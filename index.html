@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Plugins</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Minecraft Plugins</h1>
+        <nav>
+            <ul>
+                <li><a href="#upload">Upload Plugin</a></li>
+                <li><a href="#plugins">Available Plugins</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <section id="upload">
+        <h2>Upload Your Plugin</h2>
+        <form id="uploadForm">
+            <input type="text" id="pluginName" placeholder="Plugin Name" required>
+            <input type="url" id="pluginUrl" placeholder="Download URL" required>
+            <button type="submit">Upload</button>
+        </form>
+    </section>
+
+    <section id="plugins">
+        <h2>Available Plugins</h2>
+        <div id="pluginList"></div>
+    </section>
+
+    <script>
+        const pluginList = document.getElementById('pluginList');
+        const uploadForm = document.getElementById('uploadForm');
+
+        let plugins = []; // Store plugins in an array
+
+        uploadForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('pluginName').value;
+            const url = document.getElementById('pluginUrl').value;
+
+            const plugin = {
+                name,
+                url,
+                downloads: 0  
+            };
+
+            plugins.push(plugin);
+            displayPlugins();
+            uploadForm.reset();
+        });
+
+        function displayPlugins() {
+            pluginList.innerHTML = '';
+            plugins.forEach((plugin, index) => {
+                pluginList.innerHTML += `
+                    <div class="plugin">
+                        <h3>${plugin.name}</h3>
+                        <a href="${plugin.url}" download>Download</a>
+                        <p>Downloads: ${plugin.downloads}</p>
+                        <button onclick="incrementDownloads(${index})">Download Count</button>
+                    </div>
+                `;
+            });
+        }
+
+        function incrementDownloads(index) {
+            plugins[index].downloads++;
+            displayPlugins();
+        }
+    </script>
+</body>
+</html>
