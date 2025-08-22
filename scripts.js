@@ -1,23 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Canvas Black Hole Animation
+    // --- Black Hole Animation ---
     const canvas = document.getElementById('blackHoleCanvas');
     const ctx = canvas.getContext('2d');
-    const width = canvas.width = canvas.offsetWidth;
-    const height = canvas.height = canvas.offsetHeight;
+    let width, height;
+
+    function resizeCanvas() {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
     const particles = [];
-    const particleCount = 200;
+    const particleCount = 300;
+    const centerX = width / 2;
+    const centerY = height / 2;
 
     function createParticle() {
         return {
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 2,
             angle: Math.random() * Math.PI * 2,
-            distance: Math.random() * (Math.min(width, height) / 2) + 20,
+            distance: Math.random() * (Math.min(width, height) / 2) * 0.8 + 10,
             speed: Math.random() * 0.005 + 0.002,
-            color: 'rgba(255, 255, 255, ' + (Math.random() * 0.5 + 0.1) + ')',
-            originalDistance: 0
+            radius: Math.random() * 1.5 + 0.5,
+            color: `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`
         };
     }
 
@@ -27,10 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function draw() {
         ctx.clearRect(0, 0, width, height);
-
-        const centerX = width / 2;
-        const centerY = height / 2;
-
+        
         // Draw the central accretion disk
         ctx.beginPath();
         const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 80);
@@ -46,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
             p.distance -= 0.05;
 
             if (p.distance < 5) {
-                p.distance = Math.random() * (Math.min(width, height) / 2) + 20;
+                p.distance = Math.random() * (Math.min(width, height) / 2) * 0.8 + 10;
                 p.angle = Math.random() * Math.PI * 2;
             }
 
-            const x = centerX + Math.cos(p.angle) * p.distance * 0.8;
+            const x = centerX + Math.cos(p.angle) * p.distance * 1.5;
             const y = centerY + Math.sin(p.angle) * p.distance;
 
             ctx.beginPath();
@@ -61,20 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         requestAnimationFrame(draw);
     }
-
-    // Adjust canvas size on resize
-    function onResize() {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-    }
-
-    window.addEventListener('resize', onResize);
-    onResize();
+    
     draw();
 
-    // Filter Button Logic
+    // --- Filter Button Logic ---
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const categories = document.querySelectorAll('.category');
+    const categories = document.querySelectorAll('.content .category');
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
