@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lithium's Marketplace</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Firebase SDKs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="title-section">
-            <div class="blackhole-container">
-                <canvas id="blackHoleCanvas"></canvas>
-            </div>
+            <canvas id="blackHoleCanvas"></canvas>
             <h1 class="title">Lithium's Marketplace</h1>
+            <div class="auth-buttons">
+                <button id="loginBtn" class="filter-btn" onclick="location.href='login.html'">Login</button>
+                <button id="signupBtn" class="filter-btn" onclick="location.href='signup.html'">Sign Up</button>
+                <span id="userEmailDisplay" class="text-color ml-4"></span>
+                <button id="logoutBtn" class="filter-btn hidden">Logout</button>
+            </div>
         </div>
 
         <div class="filters">
@@ -25,7 +33,7 @@
         <div class="content">
             <div class="category free active">
                 <h2>Free Plugins</h2>
-                <p>Content for free plugins will go here.</p>
+                <p>Content for free plugins will go here. You must be logged in to access premium features.</p>
                 <div class="item-grid">
                     <div class="item">Item 1</div>
                     <div class="item">Item 2</div>
@@ -48,5 +56,6 @@
     </div>
 
     <script src="scripts.js"></script>
+    <script type="module" src="firebase.js"></script>
 </body>
 </html>
