@@ -18,12 +18,26 @@ body {
     align-items: flex-start;
     min-height: 100vh;
     padding-top: 50px;
+    position: relative; /* Needed to contain the content */
+    overflow: hidden; /* Prevents scrollbars from appearing */
+}
+
+/* New CSS to make the black hole canvas the background */
+#blackHoleCanvas {
+    position: fixed; /* Positions the canvas relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    z-index: -1; /* Puts the canvas behind all other content */
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
     text-align: center;
+    position: relative; /* Ensures this container stays on top of the canvas */
+    z-index: 1;
 }
 
 .title-section {
@@ -35,21 +49,7 @@ body {
     align-items: center;
     overflow: hidden;
     margin-bottom: 20px;
-}
-
-.blackhole-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-#blackHoleCanvas {
-    width: 100%;
-    height: 100%;
+    /* We no longer need the blackhole-container since the canvas is full-screen */
 }
 
 .title {
@@ -80,6 +80,7 @@ body {
     transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
     border-radius: 5px;
     text-transform: uppercase;
+    backdrop-filter: blur(5px); /* Adds a cool blur effect behind the button */
 }
 
 .filter-btn:hover {
@@ -94,11 +95,12 @@ body {
 }
 
 .content {
-    background-color: var(--purple-dark);
+    background-color: rgba(44, 0, 68, 0.7); /* Use an rgba value for transparency */
     padding: 30px;
     border-radius: 10px;
     border: 2px solid var(--purple-medium);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* Adds a strong blur effect behind the content */
 }
 
 .category {
@@ -126,7 +128,7 @@ body {
 }
 
 .item {
-    background-color: var(--bg-color);
+    background-color: rgba(26, 0, 41, 0.8); /* Use an rgba value for transparency */
     padding: 20px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
