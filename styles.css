@@ -18,38 +18,38 @@ body {
     align-items: flex-start;
     min-height: 100vh;
     padding-top: 50px;
-    position: relative; /* Needed to contain the content */
-    overflow: hidden; /* Prevents scrollbars from appearing */
+    position: relative;
+    overflow: hidden;
 }
 
 /* New CSS to make the black hole canvas the background */
 #blackHoleCanvas {
-    position: fixed; /* Positions the canvas relative to the viewport */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    z-index: -1; /* Puts the canvas behind all other content */
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
     text-align: center;
-    position: relative; /* Ensures this container stays on top of the canvas */
+    position: relative;
     z-index: 1;
 }
 
 .title-section {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 300px; /* Adjust height as needed */
     display: flex;
+    flex-direction: column; /* Align items vertically */
     justify-content: center;
     align-items: center;
     overflow: hidden;
     margin-bottom: 20px;
-    /* We no longer need the blackhole-container since the canvas is full-screen */
 }
 
 .title {
@@ -60,6 +60,27 @@ body {
     z-index: 2;
     text-transform: uppercase;
     letter-spacing: 5px;
+    margin-bottom: 20px; /* Spacing below title */
+}
+
+.auth-buttons {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.auth-buttons .filter-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.auth-buttons #userEmailDisplay {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--purple-light);
+    margin-right: 10px;
 }
 
 .filters {
@@ -80,7 +101,7 @@ body {
     transition: background-color 0.3s, border-color 0.3s, transform 0.2s;
     border-radius: 5px;
     text-transform: uppercase;
-    backdrop-filter: blur(5px); /* Adds a cool blur effect behind the button */
+    backdrop-filter: blur(5px);
 }
 
 .filter-btn:hover {
@@ -95,12 +116,12 @@ body {
 }
 
 .content {
-    background-color: rgba(44, 0, 68, 0.7); /* Use an rgba value for transparency */
+    background-color: rgba(44, 0, 68, 0.7);
     padding: 30px;
     border-radius: 10px;
     border: 2px solid var(--purple-medium);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px); /* Adds a strong blur effect behind the content */
+    backdrop-filter: blur(10px);
 }
 
 .category {
@@ -128,7 +149,7 @@ body {
 }
 
 .item {
-    background-color: rgba(26, 0, 41, 0.8); /* Use an rgba value for transparency */
+    background-color: rgba(26, 0, 41, 0.8);
     padding: 20px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -145,6 +166,119 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Authentication Page Specific Styles --- */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.auth-container {
+    background-color: rgba(44, 0, 68, 0.85); /* Slightly less transparent */
+    padding: 40px;
+    border-radius: 10px;
+    border: 2px solid var(--purple-medium);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px); /* Stronger blur for auth forms */
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.auth-title {
+    font-size: 3rem;
+    color: var(--text-color);
+    text-shadow: 0 0 10px var(--purple-light);
+    margin-bottom: 30px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--purple-light);
+    font-weight: bold;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: rgba(26, 0, 41, 0.6); /* Slightly transparent input */
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+}
+
+.auth-form input[type="email"]:focus,
+.auth-form input[type="password"]:focus {
+    border-color: var(--purple-light);
+    box-shadow: 0 0 8px rgba(157, 51, 209, 0.5);
+}
+
+.auth-button {
+    background-color: var(--purple-medium);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.auth-button:hover {
+    background-color: var(--purple-light);
+    transform: translateY(-2px);
+}
+
+.auth-link-text {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.auth-link-text a {
+    color: var(--purple-light);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.auth-link-text a:hover {
+    color: var(--text-color);
+    text-decoration: underline;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    color: white; /* Default white color */
+}
+
+.message.error {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.message.success {
+    background-color: rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.5);
+}
+
+
 @media (max-width: 768px) {
     .title {
         font-size: 2.5rem;
@@ -153,5 +287,9 @@ body {
     .filter-btn {
         padding: 10px 20px;
         font-size: 1rem;
+    }
+
+    .auth-title {
+        font-size: 2.2rem;
     }
 }
