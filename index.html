@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lithium's Marketplace</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Firebase SDKs -->
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="title-section">
             <canvas id="blackHoleCanvas"></canvas>
             <h1 class="title">Lithium's Marketplace</h1>
-            <div class="auth-buttons">
+            <div class="auth-controls">
                 <button id="loginBtn" class="filter-btn" onclick="location.href='login.html'">Login</button>
                 <button id="signupBtn" class="filter-btn" onclick="location.href='signup.html'">Sign Up</button>
-                <span id="userEmailDisplay" class="text-color ml-4"></span>
+                <span id="userEmailDisplay" class="hidden"></span>
                 <button id="logoutBtn" class="filter-btn hidden">Logout</button>
+                <button id="settingsBtn" class="settings-btn hidden">
+                    <svg class="gear-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path d="M495.9 166.6c3.1 8.7 3.9 18.2 2.1 27.2c-1.8 9-5.8 17.2-11.7 23.7l-45.9 52.8c-7.9 9.1-8.6 21.2-1.7 30.6l3.9 5.3c15.2 20.7 15.2 46.2 0 66.9l-3.9 5.3c-6.9 9.4-6.2 21.5 1.7 30.6l45.9 52.8c5.9 6.5 9.9 14.7 11.7 23.7s-1.1 18.5-4.3 27.2c-3.1 8.7-8.3 16.5-14.9 22.6s-14.8 11.2-24.3 14c-9.5 2.8-19.4 2.8-29 0c-9.6-2.8-18.3-7.5-25.7-13.9l-45.9-52.8c-7.9-9.1-20-9.1-27.9 0l-3.9 5.3c-15.2 20.7-40.7 20.7-55.9 0l-3.9-5.3c-7.9-9.1-20-9.1-27.9 0l-45.9 52.8c-7.4 6.4-16.1 11.1-25.7 13.9s-19.5 2.8-29 0c-9.5-2.8-19-7.5-24.3-14s-11.8-13.9-14.9-22.6c-3.1-8.7-3.9-18.2-2.1-27.2s5.8-17.2 11.7-23.7l45.9-52.8c7.9-9.1 8.6-21.2 1.7-30.6l-3.9-5.3c-15.2-20.7-15.2-46.2 0-66.9l3.9-5.3c6.9-9.4 6.2-21.5-1.7-30.6L111.9 190c-5.9-6.5-9.9-14.7-11.7-23.7s1.1-18.5 4.3-27.2c3.1-8.7 8.3-16.5 14.9-22.6s14.8-11.2 24.3-14c9.5-2.8 19.4-2.8 29 0c9.6 2.8 18.3 7.5 25.7 13.9l45.9 52.8c7.9 9.1 20 9.1 27.9 0l3.9-5.3c15.2-20.7 40.7-20.7 55.9 0l3.9 5.3c7.9 9.1 20 9.1 27.9 0l45.9-52.8c7.4-6.4 16.1-11.1 25.7-13.9s19.5-2.8 29 0c9.5 2.8 19 7.5 24.3 14s11.8 13.9 14.9 22.6zM256 320a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/>
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -55,7 +56,36 @@
         </div>
     </div>
 
+    <div id="settingsModal" class="settings-modal hidden">
+        <div class="settings-modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Settings</h2>
+
+            <div class="setting-option">
+                <h3>Theme</h3>
+                <div class="theme-options">
+                    <label><input type="radio" name="theme" value="purple" checked> Purple (Default)</label>
+                    <label><input type="radio" name="theme" value="blue"> Blue</label>
+                    <label><input type="radio" name="theme" value="black"> Black</label>
+                    <label><input type="radio" name="theme" value="white"> White</label>
+                </div>
+            </div>
+
+            <div class="setting-option">
+                <h3>Previous Transactions</h3>
+                <button id="viewTransactionsBtn" class="filter-btn">View Transactions</button>
+                <div id="transactionsDisplay" class="transactions-display hidden">
+                    </div>
+            </div>
+
+            <div class="setting-option">
+                <h3>Tickets</h3>
+                <p>Ticket system coming soon!</p>
+            </div>
+        </div>
+    </div>
+
     <script src="scripts.js"></script>
-    <script type="module" src="firebase.js"></script>
+    <script src="auth.js"></script>
 </body>
 </html>
